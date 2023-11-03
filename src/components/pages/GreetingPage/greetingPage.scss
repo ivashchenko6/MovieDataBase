@@ -1,0 +1,35 @@
+.about {
+    font-family: 'Pixelify Sans', cursive;
+    padding-top: 50px;
+    &__description {
+        display: block;
+        
+        margin: 0 auto;
+        margin-top: 100px;
+        width: 460px;
+        font-size: 30px;
+        text-align: center;
+
+        span {
+            color: #E57924
+        }
+    }
+
+
+    &__github {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 30px;
+
+
+        a {
+            color: #2CA9AB;
+            text-decoration: none;
+            font-size: 30px;
+            &:hover {
+                color:#2D7374;
+                cursor: pointer;
+            }
+        }
+    }
+}

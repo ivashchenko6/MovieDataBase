@@ -1,0 +1,29 @@
+.choose-block {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
+    
+    &__wrapper {    
+
+        display: flex;
+        justify-content: space-between;
+        width: 400px;
+    }
+    .choice-item {
+        font-size: 30px;
+        font-weight: 700;
+        color: pink;
+        text-decoration: none;
+        border: 1px solid blue;
+        border-radius: 20px;
+        padding: 10px 15px;
+        text-align: center;
+        &:hover {
+            cursor: pointer;
+            color: #9C558B;
+            
+        }
+    }
+}
+

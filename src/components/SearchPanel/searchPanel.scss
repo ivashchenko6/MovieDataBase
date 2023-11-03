@@ -1,0 +1,29 @@
+.search-panel {
+    padding-top: 50px;
+    text-align: center;
+    &__input {
+        height: 30px;
+        width: 220px;
+        font-size: 20px;
+        
+        text-align: center;
+    }   
+
+    &__hint {
+        margin-top: 10px;
+    }
+
+    &__btn {
+        background-color:aqua;
+        border:none;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-left: 10px;
+        &:hover {
+            cursor: pointer;
+            background-color:blue;
+            color:white;
+        }
+    }
+    
+}
