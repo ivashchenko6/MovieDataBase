@@ -1,0 +1,67 @@
+.fz20 {
+    font-size: 20px;
+}
+
+.person-item {
+    margin-top: 50px;
+    width: 700px;
+        
+
+    &__name {
+        font-family: "Pixelify Sans", cursive;
+        font-size: 30px;
+    }
+
+    &__wrapper {
+        display: flex;
+
+    }
+
+    &__wrapper-information {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        span {
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+
+    
+
+    .person__known-movies-wrapper {
+        display: flex;
+        width: 450px;
+    }
+
+
+    .person__known-movies {
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .known-for__item {
+        display: block;
+        text-decoration: none;
+        color: #3498DB;
+    }
+
+    .person__btn-about {
+        display: block;
+        width: 150px;
+        border: none;
+        background-color: #C9BA5A;
+        padding: 15px 20px;
+        margin: 0 auto;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        color:white;
+        margin-bottom: 20px;
+
+        &:hover {
+            background: #9A8F4A;
+        }
+    }
+}

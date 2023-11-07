@@ -1,9 +1,9 @@
-import FilmItem from "../filmItem/FilmItem"
+import MovieItem from "../movieItem/MovieItem"
 
 import './moviesList.scss';
-const MoviesList = ({moviesList}) => {
+const MoviesListByName = ({moviesList}) => {
     const items = moviesList.map((item, i) => {
-        return <FilmItem key={i} movie={item}/>
+        return <MovieItem key={i} movie={item}/>
     })
     return (
         <ul className="movies-list">
@@ -12,4 +12,4 @@ const MoviesList = ({moviesList}) => {
     )
 }
 
-export default MoviesList
+export default MoviesListByName;

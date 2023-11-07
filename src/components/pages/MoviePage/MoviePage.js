@@ -57,7 +57,7 @@ const View = ({movie}) => {
         if(item === '/') {
             return <span className="divider" key={i}>{` ${item} `}</span>
         } else {
-            return <Link key={i} to={`${item.toLowerCase()}`} className="genre-wrapper__item">{item}</Link>
+            return <Link key={i} to={`/genres/${item.toLowerCase()}`} className="genre-wrapper__item">{item}</Link>
         }
     });
     

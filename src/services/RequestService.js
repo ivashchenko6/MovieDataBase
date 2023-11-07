@@ -4,8 +4,8 @@ const RequestService = () => {
 
     const _apiBase = `https://api.themoviedb.org/3/`;
     const {loading, error, clearError, request} = useHttp();
-    const getGenres = async (genres = []) => {
 
+    const getGenres = async (genres = []) => {
         const res = await request(`${_apiBase}genre/movie/list?language=en`);
         const genresList = res.genres.filter(item => genres.includes(item.id));
         return genresList;
@@ -31,12 +31,17 @@ const RequestService = () => {
         
     }
 
-    const getExternalId = async (id = 0) => {
-        const res = await request(`${_apiBase}movie/${id}/external_ids`);
+    const getExternalId = async (id = 0, type = 'movie') => {
+        const res = await request(`${_apiBase}${type}/${id}/external_ids`);
         return res;
     }
 
-    
+
+
+    const getTrendingPeople = async (time_window = 'week') => {
+        const res = await request (`${_apiBase}trending/person/${time_window}`);
+        return res;
+    }
 
     const _transformData = (data) => {
         
@@ -63,7 +68,9 @@ const RequestService = () => {
             getPopularMovies,
             getMovieById,
             getExternalId,
-            getGenres,}
+            getGenres,
+            getTrendingPeople,
+        }
 
 }
 
