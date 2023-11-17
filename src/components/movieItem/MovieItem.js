@@ -4,7 +4,7 @@ import './movieItem.scss';
 
 const MovieItem = ({item}) => {
     
-    const {adult, id, title, overview, poster_path, vote_average, release_date} = item
+    const {adult, id, title, overview, poster_path, vote_average, release_date} = item;
     return (
         <li className="movie__item">
             <div className="movie__title-wrapper">

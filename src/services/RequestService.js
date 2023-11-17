@@ -17,7 +17,7 @@ const RequestService = () => {
         return res.results.map(_transformData);
     }
 
-    const getPopularMovies = async () => {
+    const getTrendingMovies = async () => {
         const res = await request(`${_apiBase}movie/popular?include_adult=true&language=en-US&page=1`);
         
         return res.results.map(_transformData);
@@ -32,6 +32,7 @@ const RequestService = () => {
     }
 
     const getExternalId = async (id = 0, type = 'movie') => {
+        
         const res = await request(`${_apiBase}${type}/${id}/external_ids`);
         return res;
     }
@@ -65,7 +66,7 @@ const RequestService = () => {
             error, 
             clearError, 
             getMovieByName,
-            getPopularMovies,
+            getTrendingMovies,
             getMovieById,
             getExternalId,
             getGenres,

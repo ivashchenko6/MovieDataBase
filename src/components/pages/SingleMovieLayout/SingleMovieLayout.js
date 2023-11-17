@@ -1,57 +1,12 @@
+import { Link } from 'react-router-dom';
 import starIcon from './star.png';
-import './moviePage.scss';
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import RequestService from '../../../services/RequestService';
-import Spinner from '../../spinner/Spinner';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-
-const MoviePage = () => {
-    const {id} = useParams();
-    const [data, setData] = useState(null);
-    const {loading, error, clearError, getMovieById, getExternalId} = RequestService();
+const SingleMovieLayout = ({data}) => {
     
-    useEffect(() => {
-        updateData();
-    }, [id])
-
-    
-
-    const updateData = async () => {
-        clearError();
-
-        await getExternalId(id)
-            .then(externalId => getMovieById(externalId.imdb_id, 'imdb_id'))
-            .then(onDataLoaded);
-    }
-
-    
-
-    const onDataLoaded = (data) => {
-        setData(data.movie_results[0]);
-    }
-
-    const spinner = loading ? <Spinner/> : null;
-    const errorMessage = error ? <ErrorMessage/> : null;
-    const content = !(loading || error || !data) ? <View movie={data}/> : null
-
-    return (
-        <>
-            {spinner}
-            {errorMessage}
-            {content}
-        </>
-        
-    )
-}
-
-
-const View = ({movie}) => {
-    
-    
-    const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count} = movie;
+    console.log('Данные загрузились');
+    const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count} = data;
     
     let genresNames = genres_list.map(item => item.name).join(' / ').split(' ');//['Animation', '/', 'Family']
+    
     
     const genresItems = genresNames.map((item, i) => {
         if(item === '/') {
@@ -96,4 +51,4 @@ const View = ({movie}) => {
     
 }
 
-export default MoviePage;
+export default SingleMovieLayout;
