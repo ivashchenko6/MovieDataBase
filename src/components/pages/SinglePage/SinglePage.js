@@ -10,10 +10,11 @@ import ErrorMessage from '../../errorMessage/ErrorMessage';
 const SinglePage = ({Component, currentSearch}) => {
     const {id} = useParams();
     const [data, setData] = useState(null);
-    const {loading, error, clearError, getMovieById, getExternalId} = RequestService();
+    const {loading, error, clearError, getDataById, getExternalId} = RequestService();
     
     useEffect(() => {
         queueMicrotask(updateData);
+        console.log(id);
     }, [id])
 
 
@@ -21,7 +22,7 @@ const SinglePage = ({Component, currentSearch}) => {
         clearError();
         
         await getExternalId(id, currentSearch)
-            .then(externalId => getMovieById(externalId.imdb_id, 'imdb_id'))
+            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', currentSearch) )
             .then(data => onDataLoaded(data[`${currentSearch}_results`][0]));
     }
 

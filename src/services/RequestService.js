@@ -12,21 +12,25 @@ const RequestService = () => {
     }
     
     const getMovieByName = async (movie = '') => {
-        const res = await request(`${_apiBase}search/movie?query=${movie}&include_adult=true&language=en-US `);
-        console.log(res);
-        return res.results.map(_transformData);
+        const res = await request(`${_apiBase}search/movie?query=${movie}&include_adult=true&language=en-US`);
+        return res.results.map(_transformData)
     }
 
     const getTrendingMovies = async () => {
         const res = await request(`${_apiBase}movie/popular?include_adult=true&language=en-US&page=1`);
+        const results = await res.results.map(_transformData);
         
-        return res.results.map(_transformData);
+        return results
     }
 
-    const getMovieById = async (id = 0, externalSource) => {
+    const getDataById = async (id = 0, externalSource, type) => {
         const res = await request(`${_apiBase}find/${id}?external_source=${externalSource}`);
-        const currentGenres = await getGenres(res.movie_results[0].genre_ids)
-        res.movie_results[0]['genres_list'] = currentGenres;
+
+        if(type === 'movie') {
+            const currentGenres = await getGenres(res.movie_results[0].genre_ids)
+            res.movie_results[0]['genres_list'] = currentGenres;
+        }
+        
         return res;
         
     }
@@ -47,7 +51,7 @@ const RequestService = () => {
     const _transformData = (data) => {
         
         const {adult, id, title, overview: description, poster_path: poster, vote_average: average, release_date, original_title, original_language, vote_count} = data;
-        return {
+        return  {
             adult,
             id, 
             title, 
@@ -67,7 +71,7 @@ const RequestService = () => {
             clearError, 
             getMovieByName,
             getTrendingMovies,
-            getMovieById,
+            getDataById,
             getExternalId,
             getGenres,
             getTrendingPeople,

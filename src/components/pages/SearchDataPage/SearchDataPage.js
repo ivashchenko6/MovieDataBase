@@ -1,12 +1,15 @@
 import MoviesListByName from "../../moviesListByName/MoviesListByName";
 import TrendingList from "../../trendingList/TrendingList";
 
-const SearchDataPage = ({ type, foundDataList, Component }) => {
+const SearchDataPage = ({ type, currentMoviesByName, Component }) => {
     
-    const content = foundDataList.length === 0 ? <TrendingList type={type} Component={Component}/> : <MoviesListByName moviesList={foundDataList}/>;
+    const content = currentMoviesByName.length === 0 ? <TrendingList type={type} Component={Component}/> : <MoviesListByName moviesList={currentMoviesByName}/>;
+    
     return (
         <div className="main-page__wrapper">
-            {content}
+            {
+                content
+            }
             
         </div>
     )

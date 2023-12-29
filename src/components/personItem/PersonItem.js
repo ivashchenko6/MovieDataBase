@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import './personItem.scss';
 const PersonItem = ({item}) => {
     
-    //TODO: Сделать карточку для каждого Человека
+    //TODO: Оформить и сделать внешний вид карточек для каждого человека
+    //TODO: Сделать страницу с выбором жанров
     const {adult, gender, id, known_for, known_for_department, name, original_name, popularity, profile_path} = item;
 
     const knownMoviesOfPerson = known_for.map(item => {

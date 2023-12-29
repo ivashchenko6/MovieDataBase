@@ -7,7 +7,7 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 const TrendingList = ({type, Component}) => {
     
-
+    
     const {loading, error, clearError, getTrendingMovies, getTrendingPeople} = RequestService();
     const [timeWindow, setTimeWindow] = useState('week');
     const [trendingList, setTrendingList] = useState([]);
@@ -47,7 +47,7 @@ const TrendingList = ({type, Component}) => {
     const spinner = loading ? <Spinner/> : null;
     const errorMessage = error ? <ErrorMessage/> : null;
     const content = !(loading || error || !trendingList) ? trendingList.map(item => {
-
+        
         return <Component item={item} key={item.id}/>
     }) : null;
     

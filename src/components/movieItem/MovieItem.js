@@ -1,10 +1,30 @@
 import { Link } from 'react-router-dom'
 
 import './movieItem.scss';
+import { useEffect, useState } from 'react';
 
 const MovieItem = ({item}) => {
     
-    const {adult, id, title, overview, poster_path, vote_average, release_date} = item;
+    const [movieItem, setMovieItem] = useState({});
+
+    
+    
+    useEffect(() => {
+        setMovieItem(item);
+    }, [])
+
+    useEffect(() => {
+        if(item !== undefined) {
+            setMovieItem(item);
+        }
+    }, [item])
+
+    
+    useEffect(() => {
+        console.log('Current', movieItem);
+    }, [movieItem])
+    const {title, vote_average, poster_path, release_date, adult, overview, id} = item
+    
     return (
         <li className="movie__item">
             <div className="movie__title-wrapper">
@@ -39,5 +59,8 @@ const MovieItem = ({item}) => {
             
         </li>
     )
+
+
+    
 }
 export default MovieItem;
