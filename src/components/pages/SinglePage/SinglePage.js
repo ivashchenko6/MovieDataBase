@@ -13,11 +13,14 @@ const SinglePage = ({Component, currentSearch}) => {
     const {loading, error, clearError, getDataById, getExternalId} = RequestService();
     
     useEffect(() => {
-        queueMicrotask(updateData);
-        console.log(id);
+        //queueMicrotask(updateData);
+        updateData();
     }, [id])
 
-
+    useEffect(() => {
+        console.log(data);
+    }, [data])
+    
     const updateData = async () => {
         clearError();
         
@@ -38,7 +41,9 @@ const SinglePage = ({Component, currentSearch}) => {
         <>
             {spinner}
             {errorMessage}
-            {content}
+            {  
+                currentSearch !== 'movie' ? content : null
+            }
         </>
         
     )

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import starIcon from './star.png';
+import './singleMovieLayout.scss';
 const SingleMovieLayout = ({data}) => {
     
-    console.log('Данные загрузились');
+    //TODO: При переходе на популярные фильмы у каждого актёра вызывается ошибка, NEED TO FIX
+    
     const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count} = data;
     
     let genresNames = genres_list.map(item => item.name).join(' / ').split(' ');//['Animation', '/', 'Family']

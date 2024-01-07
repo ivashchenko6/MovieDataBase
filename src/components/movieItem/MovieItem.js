@@ -1,28 +1,9 @@
 import { Link } from 'react-router-dom'
-
 import './movieItem.scss';
-import { useEffect, useState } from 'react';
 
 const MovieItem = ({item}) => {
     
-    const [movieItem, setMovieItem] = useState({});
-
-    
-    
-    useEffect(() => {
-        setMovieItem(item);
-    }, [])
-
-    useEffect(() => {
-        if(item !== undefined) {
-            setMovieItem(item);
-        }
-    }, [item])
-
-    
-    useEffect(() => {
-        console.log('Current', movieItem);
-    }, [movieItem])
+    console.log(item);
     const {title, vote_average, poster_path, release_date, adult, overview, id} = item
     
     return (

@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import starIcon from './star.png';
 import './singlePersonLayout.scss';
 const SinglePersonLayout = ({data}) => {
     
     
-    console.log(data)
     const {adult, gender, id, known_for, known_for_department, name, original_name, popularity, profile_path} = data;
     
-    const knownMoviesOfPerson = known_for.map(item => {
-        return <Link key={item.id} to={`/search/movies/${item.id}`} className="known-for__item">{item.title}</Link>
+
+    const knownMoviesOfPerson = known_for.map((item, i ) => {
+        
+        return <li><Link key={item.id + i} to={`/search/movies/${item.id}`} className="known-for__item">{item.title}</Link></li>
     });
 
     return (
-        <div className="person-page__wrapper">
+        <div className="person-page__block">
             <h1 className="person-page__name">{name}</h1>
 
             <div className="person-page__wrapper">
@@ -20,23 +20,26 @@ const SinglePersonLayout = ({data}) => {
 
                 <div className="person-page__wrapper-information">
                     <div className="person-page__information">
-                        <div className="person-page__gender"><span className="fz20">Gender:</span> {gender === 1 ? 'Female' : 'Male'}</div>
+                        <div className="person-page__gender">
+                            <span className="fz20 info-mark">Gender:</span> <span className='information-item'>{gender === 1 ? 'Female' : 'Male'}</span>
+                        </div>
+                        
                         <div className="person-page__known-movies-wrapper">
-                            <span className="fz20">Known Movies: </span>
-                            <div className="person__known-movies">
+                            <span className="fz20 info-mark">Known Movies: </span>
+                            <ul className="person__known-movies">
                                 {knownMoviesOfPerson}
-                            </div>
+                            </ul>
                         </div>
                         <div className="person-page__original-name">
-                            <span className="fz20">Original Name: </span>{original_name}
+                            <span className="fz20 info-mark">Original Name: </span><span className='information-item'>{original_name}</span>
                         </div>
 
                         <div className="person-page__popularity">
-                            <span className="fz20">Popularity: </span>{popularity.toFixed(1)}
+                            <span className="fz20 info-mark">Popularity: </span><span className='information-item'>{popularity.toFixed(1)}</span>
                         </div>
 
                         <div className="person-page__known-department">
-                            <span className="fz20">Popular Genre: </span>{known_for_department}
+                            <span className="fz20 info-mark">Popular Genre: </span><span className='information-item'>{known_for_department}</span>
                         </div>
                     </div>
                 </div>
