@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Header from '../header/Header';
@@ -15,11 +15,9 @@ import SearchDataPage from '../pages/SearchDataPage/SearchDataPage';
 import PersonItem from '../personItem/PersonItem';
 import MovieItem from '../movieItem/MovieItem';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
-import './app.scss';
-import SinglePage from '../pages/SinglePage/SinglePage';
 import SingleMovieLayout from '../pages/SingleMovieLayout/SingleMovieLayout';
 import SinglePersonLayout from '../pages/SinglePersonLayout/SinglePersonLayout';
-
+import './app.scss';
 const {Provider} = movieContext
 
 const App = () => {
@@ -74,8 +72,16 @@ const App = () => {
                                 />
                                 
 
+                                <Route path="/search/movies/:movieId" 
+                                        element={<SingleMovieLayout/>}
+                                />
+                                
+                                <Route path="/search/persons/:personId"
+                                        element={<SinglePersonLayout/>}
+                                />
+
                             
-                                <Route path="/search/movies/:id" 
+                                {/* <Route path="/search/movies/:id" 
                                         element={<SinglePage 
                                                     Component={SingleMovieLayout} 
                                                     currentSearch="movie"/>
@@ -87,7 +93,7 @@ const App = () => {
                                                     Component={SinglePersonLayout}
                                                     currentSearch="person"/>
                                         }
-                                />
+                                /> */}
                                 
 
                                 <Route path="*" element={<Page404/>}/> {/* Страница Ошибки */}
