@@ -1,10 +1,51 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import starIcon from './star.png';
 import './singleMovieLayout.scss';
-const SingleMovieLayout = ({data}) => {
+import { useEffect, useState } from 'react';
+import RequestService from '../../../services/RequestService';
+import Spinner from '../../spinner/Spinner';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
+const SingleMovieLayout = () => {
+    const {movieId} = useParams();
+    const [data, setData] = useState(null);
+    const {loading, error, clearError, getDataById, getExternalId} = RequestService();
     
-    //TODO: При переходе на популярные фильмы у каждого актёра вызывается ошибка, NEED TO FIX
+    useEffect(() => {
+        updateData();
+    }, [movieId])
     
+    const updateData = async () => {
+        clearError();
+        await getExternalId(movieId, "movie")
+            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "movie") )
+            .then(data => onDataLoaded(data[`${"movie"}_results`][0]));
+    }
+
+    const onDataLoaded = (data) => setData(data);
+
+    
+    const spinner = loading ? <Spinner/> : null;
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const content = !(loading || error || !data) ? <View data={data}/> : null
+    
+    return (
+        <>
+            {spinner}
+            {errorMessage}
+            {  
+                content
+            }
+        </>
+    )
+    
+    
+    
+    
+    
+}
+
+
+const View = ({data}) => {
     const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count} = data;
     
     let genresNames = genres_list.map(item => item.name).join(' / ').split(' ');//['Animation', '/', 'Family']
@@ -17,7 +58,7 @@ const SingleMovieLayout = ({data}) => {
             return <Link key={i} to={`/genres/${item.toLowerCase()}`} className="genre-wrapper__item">{item}</Link>
         }
     });
-    
+
     return (
         <div className="movie-page__wrapper">
             <div className="movie-page__header">
@@ -50,7 +91,6 @@ const SingleMovieLayout = ({data}) => {
             <div className="desription">{overview}</div>
         </div>
     )
-    
 }
 
 export default SingleMovieLayout;

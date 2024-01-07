@@ -1,16 +1,50 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './singlePersonLayout.scss';
-const SinglePersonLayout = ({data}) => {
-    
-    
-    const {adult, gender, id, known_for, known_for_department, name, original_name, popularity, profile_path} = data;
-    
+import { useEffect, useState } from 'react';
+import RequestService from '../../../services/RequestService';
+import Spinner from '../../spinner/Spinner';
+import ErrorMessage from '../../errorMessage/ErrorMessage';
+const SinglePersonLayout = () => {
 
+    const {personId} = useParams();
+    const [data, setData] = useState(null);
+    const {loading, error, clearError, getDataById, getExternalId} = RequestService();
+    
+    useEffect(() => {
+        updateData();
+    }, [personId])
+    
+    const updateData = async () => {
+        clearError();
+        await getExternalId(personId, "person")
+            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "person") )
+            .then(data => onDataLoaded(data[`${"person"}_results`][0]));
+    }
+
+    const onDataLoaded = (data) => setData(data);
+
+    
+    const spinner = loading ? <Spinner/> : null;
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const content = !(loading || error || !data) ? <View data={data}/> : null
+    
+    return (
+        <>
+            {spinner}
+            {errorMessage}
+            {  
+                content
+            }
+        </>
+    )
+}
+
+const View = ({data}) => {
+    const {adult, gender, id, known_for, known_for_department, name, original_name, popularity, profile_path} = data;
     const knownMoviesOfPerson = known_for.map((item, i ) => {
         
         return <li><Link key={item.id + i} to={`/search/movies/${item.id}`} className="known-for__item">{item.title}</Link></li>
     });
-
     return (
         <div className="person-page__block">
             <h1 className="person-page__name">{name}</h1>
@@ -49,7 +83,6 @@ const SinglePersonLayout = ({data}) => {
             </div>
         </div>
     )
-    
 }
 
 export default SinglePersonLayout;
