@@ -1,9 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
-import './singlePersonLayout.scss';
 import { useEffect, useState } from 'react';
 import RequestService from '../../../services/RequestService';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
+import './singlePersonLayout.scss';
 const SinglePersonLayout = () => {
 
     const {personId} = useParams();

@@ -80,12 +80,15 @@ const App = () => {
                                         element={<SinglePersonLayout/>}
                                 />
 
-                            
+                                        
+
+                                        
+                                
                                 {/* <Route path="/search/movies/:id" 
-                                        element={<SinglePage 
-                                                    Component={SingleMovieLayout} 
-                                                    currentSearch="movie"/>
-                                        }
+                                    element={<SinglePage 
+                                                Component={SingleMovieLayout} 
+                                                currentSearch="movie"/>
+                                    }
                                 />
                                 
                                 <Route path="/search/persons/:id"
@@ -94,6 +97,8 @@ const App = () => {
                                                     currentSearch="person"/>
                                         }
                                 /> */}
+                                
+                                
                                 
 
                                 <Route path="*" element={<Page404/>}/> {/* Страница Ошибки */}

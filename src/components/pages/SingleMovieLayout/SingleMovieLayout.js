@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 import starIcon from './star.png';
-import './singleMovieLayout.scss';
 import { useEffect, useState } from 'react';
 import RequestService from '../../../services/RequestService';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
+import './singleMovieLayout.scss';
 const SingleMovieLayout = () => {
     const {movieId} = useParams();
     const [data, setData] = useState(null);
