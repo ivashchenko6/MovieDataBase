@@ -18,6 +18,7 @@ import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 import SingleMovieLayout from '../pages/SingleMovieLayout/SingleMovieLayout';
 import SinglePersonLayout from '../pages/SinglePersonLayout/SinglePersonLayout';
 import './app.scss';
+import GenresPage from '../pages/GenresPage/GenresPage';
 const {Provider} = movieContext
 
 const App = () => {
@@ -37,7 +38,7 @@ const App = () => {
         setCurrentMoviesByName([]);
     }
     
-    //TODO: Need to fix search problem 
+
 
     const setMovieName = (e) => setMovie(e.target.value);
     
@@ -81,25 +82,10 @@ const App = () => {
                                 />
 
                                         
-
-                                        
-                                
-                                {/* <Route path="/search/movies/:id" 
-                                    element={<SinglePage 
-                                                Component={SingleMovieLayout} 
-                                                currentSearch="movie"/>
-                                    }
+                                <Route path="/search/genres"
+                                        element={<GenresPage/>}
                                 />
-                                
-                                <Route path="/search/persons/:id"
-                                        element={<SinglePage
-                                                    Component={SinglePersonLayout}
-                                                    currentSearch="person"/>
-                                        }
-                                /> */}
-                                
-                                
-                                
+                                        
 
                                 <Route path="*" element={<Page404/>}/> {/* Страница Ошибки */}
                             </Routes>

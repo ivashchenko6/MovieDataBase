@@ -10,6 +10,7 @@ const SearchMainPage = () => {
             <div className="choose-block__wrapper">
                 <Link className="choice-item" to={`persons`}>Find Person</Link>
                 <Link className="choice-item" to={`movies`}>Find Movie</Link>
+                <Link className="choice-item" to={`genres`}>Find Genre</Link>
             </div>
             <h4 className="choose-block__description">select what you want to search</h4>
 
