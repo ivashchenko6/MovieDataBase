@@ -8,17 +8,27 @@ import './singleMovieLayout.scss';
 const SingleMovieLayout = () => {
     const {movieId} = useParams();
     const [data, setData] = useState(null);
-    const {loading, error, clearError, getDataById, getExternalId} = RequestService();
+    const {loading, error, clearError, getDataById, getExternalId, getMovieReviews} = RequestService();
     
+
     useEffect(() => {
         updateData();
     }, [movieId])
     
+    
+
     const updateData = async () => {
         clearError();
         await getExternalId(movieId, "movie")
-            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "movie") )
-            .then(data => onDataLoaded(data[`${"movie"}_results`][0]));
+            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "movie"))
+            .then(data => onDataLoaded(data[`${"movie"}_results`][0]))
+            .then(() => getMovieReviews(movieId))
+            .then(res => {
+                console.log(res);  //reviews.results    []
+                //TODO: Разобраться с запросом на комментарии и придумать как их добавить в data
+                // onDataLoaded({...data, reviews.results})
+            
+            })
     }
 
     const onDataLoaded = (data) => setData(data);
@@ -26,14 +36,14 @@ const SingleMovieLayout = () => {
     
     const spinner = loading ? <Spinner/> : null;
     const errorMessage = error ? <ErrorMessage/> : null;
-    const content = !(loading || error || !data) ? <View data={data}/> : null
+    //const content = !(loading || error || !data) ? <View data={data}/> : null
     
     return (
         <>
             {spinner}
             {errorMessage}
             {  
-                content
+                //content
             }
         </>
     )

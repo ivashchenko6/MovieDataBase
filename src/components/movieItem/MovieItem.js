@@ -3,7 +3,6 @@ import './movieItem.scss';
 
 const MovieItem = ({item}) => {
     
-    console.log(item);
     const {title, vote_average, poster_path, release_date, adult, overview, id} = item
     
     return (

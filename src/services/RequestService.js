@@ -5,6 +5,11 @@ const RequestService = () => {
     const _apiBase = `https://api.themoviedb.org/3/`;
     const {loading, error, clearError, request} = useHttp();
 
+    const getMovieReviews = async (movieId = 0, language = 'en-US') => {
+        const res = await request(`${_apiBase}movie/${movieId}/reviews?language=${language}&page=1`)
+        console.log(res)
+    }
+
     const getGenres = async (genres = []) => {
         const res = await request(`${_apiBase}genre/movie/list?language=en`);
         const genresList = res.genres.filter(item => genres.includes(item.id));
@@ -48,6 +53,13 @@ const RequestService = () => {
         return res;
     }
 
+    const getGenresList = async (language = 'en') => {
+        const res = await request(`${_apiBase}genre/movie/list?language=${language}`);
+        return res.genres; 
+    }
+
+    
+
     const _transformData = (data) => {
         
         const {adult, id, title, overview: description, poster_path: poster, vote_average: average, release_date, original_title, original_language, vote_count} = data;
@@ -74,6 +86,8 @@ const RequestService = () => {
             getDataById,
             getExternalId,
             getGenres,
+            getGenresList,
+            getMovieReviews, 
             getTrendingPeople,
         }
 

@@ -8,9 +8,12 @@
 
         display: flex;
         justify-content: space-between;
-        width: 400px;
+        flex-wrap: wrap;
+        width: 600px;
     }
     .choice-item {
+        display: block;
+        width: 150px;
         font-size: 30px;
         font-weight: 700;
         color: pink;
