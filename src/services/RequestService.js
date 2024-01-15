@@ -7,7 +7,7 @@ const RequestService = () => {
 
     const getMovieReviews = async (movieId = 0, language = 'en-US') => {
         const res = await request(`${_apiBase}movie/${movieId}/reviews?language=${language}&page=1`)
-        console.log(res)
+        return res;
     }
 
     const getGenres = async (genres = []) => {
@@ -28,23 +28,31 @@ const RequestService = () => {
         return results
     }
 
-    const getDataById = async (id = 0, externalSource, type) => {
-        const res = await request(`${_apiBase}find/${id}?external_source=${externalSource}`);
-
-        if(type === 'movie') {
-            const currentGenres = await getGenres(res.movie_results[0].genre_ids)
-            res.movie_results[0]['genres_list'] = currentGenres;
-        }
-        
-        return res;
-        
-    }
-
     const getExternalId = async (id = 0, type = 'movie') => {
         
         const res = await request(`${_apiBase}${type}/${id}/external_ids`);
         return res;
     }
+
+    const getDataById = async (id = 0, externalSource, type) => {
+        
+        const externalId = await getExternalId(id, type).then(obj => obj[externalSource]);
+        
+        const res = await request(`${_apiBase}find/${externalId}?external_source=${externalSource}`);
+        
+        if(type === 'movie') {
+            const currentGenres = await getGenres(res.movie_results[0].genre_ids)
+            const reviews = await getMovieReviews(id);
+            
+            res.movie_results[0]['genres_list'] = currentGenres;
+            res.movie_results[0]['reviews'] = reviews;
+        }
+        console.log(res[`${type}_results`][0])
+        return res[`${type}_results`][0];
+        
+    }
+
+    
 
 
 

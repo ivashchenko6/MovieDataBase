@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './personItem.scss';
+
 const PersonItem = ({item}) => {
     
     //TODO: Оформить и сделать внешний вид карточек для каждого человека

@@ -22,6 +22,11 @@ import GenresPage from '../pages/GenresPage/GenresPage';
 const {Provider} = movieContext
 
 const App = () => {
+
+    //TODO: Сделать функцию которая проверяет есть ли у фильма или актёра его картинка, если нет - вставлять заглушку
+    //TODO: Пофиксить баг когда в поисковике фильмов - был найден фильм и потом перешли на страницу Find Person - остаётся информация о фильмах
+
+
     const [movie, setMovie] = useState('');
     const [currentMoviesByName, setCurrentMoviesByName] = useState([]);
     

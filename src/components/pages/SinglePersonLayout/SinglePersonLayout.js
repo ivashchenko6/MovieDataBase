@@ -8,7 +8,7 @@ const SinglePersonLayout = () => {
 
     const {personId} = useParams();
     const [data, setData] = useState(null);
-    const {loading, error, clearError, getDataById, getExternalId} = RequestService();
+    const {loading, error, clearError, getDataById} = RequestService();
     
     useEffect(() => {
         updateData();
@@ -16,9 +16,8 @@ const SinglePersonLayout = () => {
     
     const updateData = async () => {
         clearError();
-        await getExternalId(personId, "person")
-            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "person") )
-            .then(data => onDataLoaded(data[`${"person"}_results`][0]));
+        await getDataById(personId, 'imdb_id', "person")
+            .then(onDataLoaded);
     }
 
     const onDataLoaded = (data) => setData(data);
@@ -41,10 +40,10 @@ const SinglePersonLayout = () => {
 
 const View = ({data}) => {
     const {adult, gender, id, known_for, known_for_department, name, original_name, popularity, profile_path} = data;
-    const knownMoviesOfPerson = known_for.map((item, i ) => {
-        
-        return <li><Link key={item.id + i} to={`/search/movies/${item.id}`} className="known-for__item">{item.title}</Link></li>
+    const knownMoviesOfPerson = known_for.map((item) => {
+        return <li key={item.id}><Link to={`/search/movies/${item.id}`} className="known-for__item">{item.title}</Link></li>
     });
+
     return (
         <div className="person-page__block">
             <h1 className="person-page__name">{name}</h1>

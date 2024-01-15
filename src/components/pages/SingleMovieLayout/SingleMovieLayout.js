@@ -5,6 +5,7 @@ import RequestService from '../../../services/RequestService';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 import './singleMovieLayout.scss';
+import ReviewItem from '../../reviewItem/ReviewItem';
 const SingleMovieLayout = () => {
     const {movieId} = useParams();
     const [data, setData] = useState(null);
@@ -15,20 +16,14 @@ const SingleMovieLayout = () => {
         updateData();
     }, [movieId])
     
-    
+    useEffect(() => {
+        console.log(`Data`, data)
+    }, [data])
 
     const updateData = async () => {
         clearError();
-        await getExternalId(movieId, "movie")
-            .then(externalId => getDataById(externalId.imdb_id, 'imdb_id', "movie"))
-            .then(data => onDataLoaded(data[`${"movie"}_results`][0]))
-            .then(() => getMovieReviews(movieId))
-            .then(res => {
-                console.log(res);  //reviews.results    []
-                //TODO: Разобраться с запросом на комментарии и придумать как их добавить в data
-                // onDataLoaded({...data, reviews.results})
-            
-            })
+        await getDataById(movieId, 'imdb_id', 'movie')
+            .then(onDataLoaded)
     }
 
     const onDataLoaded = (data) => setData(data);
@@ -36,14 +31,14 @@ const SingleMovieLayout = () => {
     
     const spinner = loading ? <Spinner/> : null;
     const errorMessage = error ? <ErrorMessage/> : null;
-    //const content = !(loading || error || !data) ? <View data={data}/> : null
+    const content = !(loading || error || !data) ? <View key={movieId} data={data}/> : null
     
     return (
         <>
             {spinner}
             {errorMessage}
             {  
-                //content
+                content
             }
         </>
     )
@@ -56,11 +51,15 @@ const SingleMovieLayout = () => {
 
 
 const View = ({data}) => {
-    const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count} = data;
+    
+    const {adult, original_title, overview, poster_path, release_date, vote_average, genres_list, original_language, vote_count, reviews} = data;
     
     let genresNames = genres_list.map(item => item.name).join(' / ').split(' ');//['Animation', '/', 'Family']
     
-    
+    const reviewsItems = reviews.results.map((review, i) => {
+        return <ReviewItem key={i} review={review}/>
+    })
+
     const genresItems = genresNames.map((item, i) => {
         if(item === '/') {
             return <span className="divider" key={i}>{` ${item} `}</span>
@@ -99,6 +98,11 @@ const View = ({data}) => {
                 </div>
             </div>
             <div className="desription">{overview}</div>
+
+
+            <ul className="movie-page__reviews-container">
+                {reviewsItems}
+            </ul>
         </div>
     )
 }
