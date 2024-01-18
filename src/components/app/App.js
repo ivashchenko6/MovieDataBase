@@ -15,11 +15,12 @@ import SearchDataPage from '../pages/SearchDataPage/SearchDataPage';
 import PersonItem from '../personItem/PersonItem';
 import MovieItem from '../movieItem/MovieItem';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
-import SingleMovieLayout from '../pages/SingleMovieLayout/SingleMovieLayout';
-import SinglePersonLayout from '../pages/SinglePersonLayout/SinglePersonLayout';
-import './app.scss';
 import GenresPage from '../pages/GenresPage/GenresPage';
-const {Provider} = movieContext
+import MoviePage from '../pages/MoviePage/MoviePage';
+import PersonPage from '../pages/PersonPage/PersonPage';
+import './app.scss';
+
+const {Provider} = movieContext;
 
 const App = () => {
 
@@ -79,11 +80,11 @@ const App = () => {
                                 
 
                                 <Route path="/search/movies/:movieId" 
-                                        element={<SingleMovieLayout/>}
+                                        element={<MoviePage/>}
                                 />
                                 
                                 <Route path="/search/persons/:personId"
-                                        element={<SinglePersonLayout/>}
+                                        element={<PersonPage/>}
                                 />
 
                                         

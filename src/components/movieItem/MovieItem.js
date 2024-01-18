@@ -30,7 +30,7 @@ const MovieItem = ({item}) => {
                             <span>Description</span>: {overview}
                         </div>
                     </div>
-                    <Link to={`${id}`} className="movie__btn-about">WATCH</Link>
+                    <Link to={`${id}`} className="movie__btn-about">ABOUT</Link>
                 </div>
                 
 
