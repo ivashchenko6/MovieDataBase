@@ -34,21 +34,16 @@ const RequestService = () => {
         return res;
     }
 
-    const getDataById = async (id = 0, externalSource, type) => {
-        
-        const externalId = await getExternalId(id, type).then(obj => obj[externalSource]);
-        
-        const res = await request(`${_apiBase}find/${externalId}?external_source=${externalSource}`);
-        
+    const getDataById = async (id = 0, type) => {
+        const res = await request(`${_apiBase}${type}/${id}`);
         if(type === 'movie') {
-            const currentGenres = await getGenres(res.movie_results[0].genre_ids)
             const reviews = await getMovieReviews(id);
-            
-            res.movie_results[0]['genres_list'] = currentGenres;
-            res.movie_results[0]['reviews'] = reviews;
+            res['reviews'] = reviews;
+        } else if (type === 'person') {
+            const known_for = await request(`${_apiBase}find/${res.imdb_id}?external_source=imdb_id`)
+            res.known_for = known_for[`${type}_results`][0].known_for;
         }
-        console.log(res[`${type}_results`][0])
-        return res[`${type}_results`][0];
+        return res;
         
     }
 
