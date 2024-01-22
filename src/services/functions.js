@@ -2,7 +2,7 @@ export function checkingTextLength(text) {
     return text.length > 588 ? `${text.slice(0, 588)}...` : text.slice(0, 588);
 }
 
-export function modifyDate(date, time) {
+export function modifyDate(date, time = ":") {
     let [year, month, day] = date.split('-'); //['2024', '01', '12']  //Year Month 
     let [hours, minutes] = time.split(':');
     switch(month) {
@@ -46,7 +46,7 @@ export function modifyDate(date, time) {
         default:
             
     }
-    return `${month} ${day} ${year} ${hours}:${minutes}`
+    return {month, day, year, hours, minutes, readyString: `${month} ${day} ${year}`};
 }
 
 

@@ -14,6 +14,7 @@ const Header = ({clearFoundedMovies}) => {
         
     }, [location]);
 
+
     return (
         <header className="header">
             <div className="container">
@@ -31,7 +32,7 @@ const Header = ({clearFoundedMovies}) => {
 
                 {
                     isHomepage ? (
-                        <Link to='search' className="header__btn">
+                        <Link to='search' className="header__btn" onClick={clearFoundedMovies}>
                             find
                         </Link>) : <SearchPanel/>
                     

@@ -1,6 +1,4 @@
-.mt-10 {
-    margin-top: 10px;
-}
+
 .movie-page {
     
     &__wrapper {
@@ -94,25 +92,25 @@
     }
 
     &__reviews-container {
+        
+        margin-top: 100px;
         list-style-type: none;
-        padding: 0;
+
     }
     
 }
 
 
-.info-mark {
-    font-size: 30px;
-    font-weight: 700;
-    
-}
+
 
 .description {
-    width: 700px;
-
-}
-
-.information-item {
+    margin-top: 25px;
     font-size: 25px;
+    border:1px solid black;
+    padding: 10px 20px;
+    background-color: #F9F8F8;
+
 }
+
+
 

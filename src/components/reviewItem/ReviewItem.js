@@ -1,11 +1,12 @@
 import avatar from './avatar.png';
 import './reviewItem.scss';
-import { modifyDate, checkingTextLength } from '../../services/calculateCurrentMonth';
+import { modifyDate, checkingTextLength } from '../../services/functions';
+import ExpandableText from '../expandableText/ExpandableText';
 
 
 
 const ReviewItem = ({review}) => {
-    //TODO: Реализовать работу комментариев под фильмов, оформить визуальную составляющую каждого комментария
+    
     console.log(review);
     const {author, author_details : {name, username, avatar_path, rating}, content, id, url} = review;
     const timeInformation = review.created_at.split('T'); //['2024-01-09', '13:50:55.111Z']
@@ -20,12 +21,12 @@ const ReviewItem = ({review}) => {
                 <div className="review-item__information">
                     <span className="review-item__name">{username}</span>
                     <span className="divider">{` | `}</span>
-                    <span className="review-item__date">{dateInformation}</span>
+                    <span className="review-item__date">{`${dateInformation.month} ${dateInformation.day} ${dateInformation.year} ${dateInformation.hours}:${dateInformation.minutes}`}</span>
                     
                 </div>
                 <div className="review-item__content">
                     
-                    {checkingTextLength(content)}
+                    {<ExpandableText text={content} maxSymbols={500} />}
                 </div>
             </div>
         </li>

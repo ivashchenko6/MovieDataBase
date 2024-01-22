@@ -45,9 +45,13 @@
     
 }
 .known-for__item {
-    color: black;
+    color: #3498DB;
+    text-decoration: none;
+    color: #3498DB;
+    font-weight: 500;
+    font-size: 25px;
     &:hover {
-        color: blue;
-        
+        cursor: pointer;
+        color: #1F618D;
     }
 }

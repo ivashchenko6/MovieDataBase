@@ -7,6 +7,8 @@ import ErrorMessage from '../../errorMessage/ErrorMessage';
 import './moviePage.scss';
 import ReviewItem from '../../reviewItem/ReviewItem';
 import InfoLineItem from '../../infoLineItem/InfoLineItem';
+import ExpandableText from '../../expandableText/ExpandableText';
+import { modifyDate } from '../../../services/functions';
 const MoviePage = () => {
     const {movieId} = useParams();
     const [data, setData] = useState(null);
@@ -70,7 +72,7 @@ const View = ({data}) => {
         return <li key={i} className="genre-item"><Link to={`/genres/${item.toLowerCase()}`}>{item}</Link></li>;
 
     });
-    
+    const releaseInfo = modifyDate(release_date).readyString;
 
     return (
         <div className="movie-page__wrapper">
@@ -92,7 +94,7 @@ const View = ({data}) => {
                 </div>
 
                 <div className="movie-page__information">
-                    <InfoLineItem classesName={`release-date`} title="Release Date" content={release_date}/>
+                    <InfoLineItem classesName={`release-date`} title="Release Date" content={releaseInfo}/>
                     
                     <div className="mt-10 genre-wrapper">
                         <span className="info-mark">Genres: </span> 
@@ -109,11 +111,16 @@ const View = ({data}) => {
                     
                     <InfoLineItem classesName={`mt-10 movie-duration`} title="Duration" content={runtime + ` min.`}/>
 
-                    <InfoLineItem classesName={`mt-10 description`} title="Description" content={overview}/>
+                    
                     
                 </div>
             </div>
             
+            <div className="mt-10 description">
+                {overview}
+                
+                
+            </div>
 
 
             <ul className="movie-page__reviews-container">
